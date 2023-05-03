@@ -16,7 +16,7 @@ const Home_Banner = () => {
                     <h1 className='mb-5 font-bold text-4xl font-serif text-primary uppercase tracking-[5px]'>Welcome</h1>
                     <h3 className='mb-3 tracking-[2px] font-semibold text-2xl font-serif'>A taste of local <br /> ingredients & seasonal flavours</h3>
                     <p className='mb-5 text-xs text-gray-300 tracking-[5px]'>WE ARE READY</p>
-                    <button className='btn primary-btn'>Chefs Menu</button>
+                    <a href="#chef_menu"><button className='btn primary-btn'>Chefs Menu</button></a>
                 </div>
             </div>
         </section>
