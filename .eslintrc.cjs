@@ -14,6 +14,7 @@ module.exports = {
     'no-unused-vars': 0,
     'no-undef': 0,
     'react/prop-types' : 0,
-    'react/jsx-no-target-blank': 0
+    'react/jsx-no-target-blank': 0,
+    'react/jsx-key' : 0
   },
 }

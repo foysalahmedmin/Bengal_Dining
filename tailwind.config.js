@@ -16,7 +16,7 @@ export default {
                   
           "secondary": "#F000B8",
                   
-          "primary-opacity": "#a8794178",
+          "primary-opacity": "#A8794178",
                   
           "info": "#3ABFF8",
                   

@@ -6,7 +6,7 @@ import { HiMenuAlt1, HiOutlineUserCircle, HiX } from "react-icons/hi";
 const Header = () => {
     const [menuActive, setMenuActive] = useState(false)
     return (
-        <header className='fixed top-5 w-full text-white'>
+        <header className='fixed top-0 md:top-5 w-full text-white z-50'>
             <div className="container">
                 <nav className='flex justify-between items-center py-2'>
                     {
@@ -22,7 +22,7 @@ const Header = () => {
                     </ul>
                     <div className='flex justify-end items-center gap-5 md:w-1/3'>
                         <h3 className=' py-3'><HiOutlineUserCircle className='text-4xl' /></h3>
-                        <Link to='/login'><button className='primary-btn'>LogIn</button></Link>
+                        <Link to='/login'><button className='btn primary-btn'>LogIn</button></Link>
                     </div>
                 </nav>
             </div>

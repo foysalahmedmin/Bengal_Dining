@@ -9,13 +9,13 @@ const Home_Banner = () => {
         backgroundSize: "cover"
     }
     return (
-        <section style={bannerStyle} className='pt-[5rem]'>
-            <div className="container h-96 flex justify-center items-center text-center text-white">
+        <section style={bannerStyle} className='pt-[5rem] h-96 md:h-screen'>
+            <div className="container h-full flex justify-center items-center text-center text-white">
                 <div>
                     <h1 className='mb-5 font-bold text-4xl font-serif text-primary uppercase tracking-[5px]'>Welcome</h1>
                     <h3 className='mb-3 tracking-[2px] font-semibold text-2xl font-serif'>A taste of local <br /> ingredients & seasonal flavours</h3>
                     <p className='mb-5 text-xs text-gray-300 tracking-[5px]'>WE ARE READY</p>
-                    <button className='primary-btn'>Chefs Menu</button>
+                    <button className='btn primary-btn'>Chefs Menu</button>
                 </div>
             </div>
         </section>
