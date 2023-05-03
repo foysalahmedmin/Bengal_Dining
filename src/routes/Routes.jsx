@@ -14,13 +14,12 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
-        loader: () => fetch(`http://localhost:55555/`)
+        element: <Home />
       },
       {
         path: "/chef/:id",
         element: <Chef />,
-        loader : ({params}) => fetch(`http://localhost:55555/chef/${params.id}`)
+        loader : ({params}) => fetch(`https://bengal-dining-server-foysalahmedmin.vercel.app/chef/${params.id}`)
       },
       {
         path: "/login",
