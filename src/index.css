@@ -6,4 +6,7 @@
     .container {
         @apply mx-auto px-[2.5%]
     }
+    .primary-btn{
+        @apply bg-primary px-5 py-2 border-2 border-transparent rounded-full hover:border-primary hover:bg-transparent hover:text-primary
+    }
 }
