@@ -4,7 +4,6 @@ const Home_Banner = () => {
     const bannerStyle = {
         backgroundColor: "black",
         backgroundImage: "linear-gradient(to bottom, rgb(0 0 0 / 48%), rgb(0 0 0 / 48%)), url(/images/home_banner_bg.jpg)",
-        // backgroundImage: "url(/images/home_banner_bg.jpg)",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover"

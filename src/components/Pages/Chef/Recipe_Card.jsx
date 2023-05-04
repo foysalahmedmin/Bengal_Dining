@@ -8,7 +8,6 @@ const Recipe_Card = ({ recipe_data }) => {
     const [favorite, setFavorite] = useState(false)
     const { recipeName, ingredients, cookingMethod, instructions, rating } = recipe_data;
     const favoriteHandler = () => {
-        console.log("hello")
         setFavorite(!favorite);
         if (!favorite) {
             toast.success('The recipe is your favorite :)', {
@@ -27,16 +26,16 @@ const Recipe_Card = ({ recipe_data }) => {
                 <p className='uppercase'>ingredients:</p>
                 <ul className='list-disc'>
                     {
-                        ingredients.map(x => <li className='bg-gray-100 mb-3 capitalize p-3'>{x}</li>)
+                        ingredients.map((x, i) => <li key={i} className='bg-gray-100 mb-3 capitalize p-3'>{x}</li>)
                     }
                 </ul>
                 <p className='uppercase'>Cooking Method: <span className='capitalize text-primary font-bold text-md'>{cookingMethod}</span></p>
                 {/* <p>Instructions: {instructions}</p> */}
-                <p className='uppercase flex items-center gap-4'><Rating
+                <div className='uppercase flex items-center gap-4'><Rating
                     style={{ maxWidth: 130 }}
                     value={rating}
                     readOnly
-                /> <span className='capitalize text-primary font-bold text-lg'>{rating}</span></p>
+                /> <span className='capitalize text-primary font-bold text-lg'>{rating}</span></div>
 
                 <div className="card-actions justify-end">
                     {

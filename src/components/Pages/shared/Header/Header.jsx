@@ -5,13 +5,11 @@ import { HiMenuAlt1, HiOutlineUserCircle, HiX } from "react-icons/hi";
 
 const Header = () => {
     const [menuActive, setMenuActive] = useState(false)
-    const [scrollTop, setScrollTop] = useState(0);
     const [scrolled, setScrolled] = useState (false)
 
     useEffect(() => {
         const handleScroll = (event) => {
             const topHeight = window.scrollY
-            setScrollTop(window.scrollY);
             if(topHeight > 80){
                 setScrolled(true)
             }else{
@@ -25,7 +23,6 @@ const Header = () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
-    console.log(scrollTop, scrolled)
     return (
         <header className={`fixed top-0 w-full z-50 transition-[top]  ${scrolled? 'text-black md:top-0 bg-white' : 'text-white md:top-5 bg-transparent'}`}>
             <div className="container">
@@ -36,7 +33,28 @@ const Header = () => {
                     <div className='md:w-1/3 ml-3 mr-auto'>
                         <h1 className='text-2xl flex items-center'><span className='text-3xl font-black text-primary'>B</span>engal <span className='text-3xl font-black text-primary'>D</span>ining</h1>
                     </div>
-                    <ul className={`absolute right-0 top-[4.79rem] p-3 min-h-[calc(100vh-9rem)] md:w-1/3 md:min-h-[auto] leading-10 md:leading-3 rounded-md md:static md:flex justify-center items-center gap-7 transition-[left] ${menuActive ? 'left-0' : 'left-[-100%]'}`}>
+                    <ul className={`
+                        w-60
+                        p-5 
+                        md:w-1/3  
+                        absolute 
+                        bg-black 
+                        md:bg-transparent 
+                        bg-opacity-50 
+                        top-[4.79rem] 
+                        min-h-[calc(100vh-9rem)] 
+                        md:min-h-[auto] 
+                        leading-10 
+                        md:leading-3 
+                        rounded-md 
+                        md:static 
+                        md:flex 
+                        justify-center 
+                        items-center 
+                        gap-7 
+                        transition-[left] 
+                        ${menuActive ? 'left-0' : 'left-[-100%]'}
+                        `}>
                         <li className='font-semibold'><ActiveLink to={"/"}>Home</ActiveLink></li>
                         <li className='font-semibold'><a href='#about'>About</a></li>
                         <li className='font-semibold'><ActiveLink to={'/blog'}>Blog</ActiveLink></li>

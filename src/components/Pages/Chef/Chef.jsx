@@ -1,10 +1,16 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigation } from 'react-router-dom';
 import Recipe_Card from './Recipe_Card';
+import LoadSpinner from '../shared/LoadSpinner/LoadSpinner';
 
 const Chef = () => {
     const chef_info = useLoaderData()
-    const { id, chefPicture, name, description, location, yearsOfExperience, likes, numRecipes, recipes } = chef_info
+    const { id, chefPicture, name, description, location, yearsOfExperience, likes, numRecipes, recipes } = chef_info ;
+    const navigation = useNavigation()
+    if (navigation.state === 'loading') {
+        return <LoadSpinner />
+    }
+    console.log(navigation)
     const bannerStyle = {
         backgroundColor: "black",
         backgroundImage: "linear-gradient(to bottom, rgb(0 0 0 / 48%), rgb(0 0 0 / 48%)), url(/images/chef_banner_bg.jpg)",
@@ -37,7 +43,7 @@ const Chef = () => {
                     </div>
                     <div className='flex flex-wrap justify-around gap-5'>
                         {
-                            recipes.map((recipe, index) => <Recipe_Card recipe_data={recipe} key={index} />)
+                            recipes.map(recipe => <Recipe_Card recipe_data={recipe} key={recipe.id} />)
                         }
                     </div>
                 </div>
