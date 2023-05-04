@@ -6,11 +6,14 @@ import LogIn from '../components/Pages/LogIn/LogIn';
 import Register from '../components/Pages/Register/Register';
 import Chef from '../components/Pages/Chef/Chef';
 import Blog from '../components/Pages/Blog/Blog';
+import PrivateRout from './PrivateRout';
+import ErrorPage from '../components/Pages/shared/ErrorPage/ErrorPage';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -18,7 +21,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/chef/:id",
-        element: <Chef />,
+        element: <PrivateRout><Chef /></PrivateRout> ,
         loader : ({params}) => fetch(`https://bengal-dining-server.vercel.app/chef/${params.id}`)
       },
       {

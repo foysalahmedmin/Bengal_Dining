@@ -15,11 +15,9 @@ const LogIn = () => {
         const password = form.password.value;
         logIn(email, password)
             .then(result => {
-                console.log(result.user)
                 navigate(from, { replace: true })
             })
             .catch((error) => {
-                const errorCode = error.code;
                 const errorMessage = error.message;
                 setError(errorMessage)
                 console.log(errorMessage)

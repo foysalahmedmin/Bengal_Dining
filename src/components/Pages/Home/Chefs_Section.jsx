@@ -4,7 +4,7 @@ import Chefs_Card from './Chefs_Card';
 const Chefs_Section = () => {
     const [chefs_info, setChefs_info] = useState([])
     useEffect(() => {
-        fetch('http://localhost:5000/')
+        fetch('https://bengal-dining-server.vercel.app/')
             .then(res => res.json())
             .then(data => setChefs_info(data))
     }, [])

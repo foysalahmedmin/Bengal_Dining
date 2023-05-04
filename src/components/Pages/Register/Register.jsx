@@ -1,15 +1,17 @@
 import React, { useContext, useState } from 'react';
 import { FaGithub, FaGoogle } from "react-icons/fa";
-import { useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../providers/AuthProvider';
 
 const Register = () => {
     const navigate = useNavigate()
+    const location = useLocation()
+    const from = location.state?.from?.pathname || '/';
     const [error, setError] = useState('')
-    const { register } = useContext(AuthContext)
+    const { register, updateProfile_name_url, register_google, register_gitHub } = useContext(AuthContext)
+
     const registerHandler = (e) => {
         e.preventDefault();
-
         const form = e.target;
         const name = form.name.value;
         const image_url = form.image_url.value;
@@ -25,16 +27,39 @@ const Register = () => {
             console.log(name, image_url, email, password, con_password)
             register(email, password)
                 .then(result => {
-                    console.log(result.user)
-                    navigate('/', { replace: true })
+                    navigate(from , { replace: true })
                 })
                 .catch((error) => {
-                    const errorCode = error.code;
                     const errorMessage = error.message;
                     setError(errorMessage)
                     console.log(errorMessage)
                 });
+
+            updateProfile_name_url(name, image_url)
         }
+    }
+
+    const googleRegisterHandler = () => {
+        register_google()
+        .then(result => {
+            navigate('/', { replace: true })
+        })
+        .catch((error) => {
+            const errorMessage = error.message;
+            setError(errorMessage)
+            console.log(errorMessage)
+        });
+    }
+    const githubRegisterHandler = () => {
+        register_gitHub()
+        .then(result => {
+            navigate('/', { replace: true })
+        })
+        .catch((error) => {
+            const errorMessage = error.message;
+            setError(errorMessage)
+            console.log(errorMessage)
+        });
     }
 
     const bannerStyle = {
@@ -65,11 +90,12 @@ const Register = () => {
                         <div className='py-2'><p className='text-warning my-2 text-center'>{error}</p></div>
                         <input className='btn primary-btn w-full text-white' type="submit" value="Submit" />
                     </form>
+                    <p className='text-center mb-3'>Already have account? <Link to='/login' className='text-primary'>login</Link> please. </p>
                     <div className='flex gap-3'>
-                        <button className='btn btn-outline btn-primary rounded-full flex-1'>
+                        <button onClick={googleRegisterHandler} className='btn btn-outline btn-primary rounded-full flex-1'>
                             <FaGoogle /> <span className='ml-3'>Register With Google</span>
                         </button>
-                        <button className='btn btn-outline btn-primary rounded-full flex-1'>
+                        <button onClick={githubRegisterHandler} className='btn btn-outline btn-primary rounded-full flex-1'>
                             <FaGithub /> <span className='ml-3'>Register With GitHub</span>
                         </button>
                     </div>
