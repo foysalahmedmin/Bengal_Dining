@@ -1,19 +1,30 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../providers/AuthProvider';
 
 const LogIn = () => {
-
-    const logInHandler = (e) =>{
+    const [error, setError] = useState('')
+    const navigate = useNavigate()
+    const location = useLocation()
+    const from = location.state?.from?.pathname || '/';
+    const { logIn } = useContext(AuthContext)
+    const logInHandler = (e) => {
         e.preventDefault();
         const form = e.target
         const email = form.email.value;
         const password = form.password.value;
-        // singIn(email, password)
-        // .then(result => {
-        //     console.log(result.user)
-        //     navigate(from, {replace: true})
-        // })
-        console.log(email , password)
+        logIn(email, password)
+            .then(result => {
+                console.log(result.user)
+                navigate(from, { replace: true })
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                setError(errorMessage)
+                console.log(errorMessage)
+            });
+        console.log(email, password)
     }
 
     const bannerStyle = {
@@ -33,11 +44,12 @@ const LogIn = () => {
                             <label htmlFor="email"></label>
                             <input className='w-full py-2 px-5 mb-5 rounded-full bg-transparent border-2 border-white' type="email" name="email" id="email" placeholder='Email' required />
                             <label htmlFor="password"></label>
-                            <input className='w-full py-2 px-5 mb-5 rounded-full bg-transparent border-2 border-white' type="password" name="password" id="password" placeholder='Password' required />
+                            <input className='w-full py-2 px-5 rounded-full bg-transparent border-2 border-white' type="password" name="password" id="password" placeholder='Password' required />
                         </div>
+                        <div className='py-2'><p className='text-warning my-2 text-center'>{error}</p></div>
                         <input className='btn primary-btn w-full text-white' type="submit" value="Submit" />
                     </form>
-                    <p className='text-center'>New User? <Link to = '/register' className='text-primary'>Register</Link> First. </p>
+                    <p className='text-center'>New User? <Link to='/register' className='text-primary'>Register</Link> First. </p>
                 </div>
             </div>
         </section>

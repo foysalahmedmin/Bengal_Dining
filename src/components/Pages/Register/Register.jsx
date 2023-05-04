@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaGithub, FaGoogle } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../providers/AuthProvider';
 
 const Register = () => {
-
+    const navigate = useNavigate()
     const [error, setError] = useState('')
-    // const {createUser} = useContext(AuthContext)
-    const registerHandler = (e) =>{
+    const { register } = useContext(AuthContext)
+    const registerHandler = (e) => {
         e.preventDefault();
 
         const form = e.target;
@@ -15,15 +17,23 @@ const Register = () => {
         const password = form.password.value
         const con_password = form.con_password.value
         setError('')
-        if(password !== con_password){
+        if (password !== con_password) {
             setError('Your Password did not match!')
-        }else if(password.length < 6){
+        } else if (password.length < 6) {
             setError('Password must be 6 disits')
-        }else{
+        } else {
             console.log(name, image_url, email, password, con_password)
-            // createUser(email, pass)
-            // .then(result => console.log(result.user))
-            // .catch(error => console.log(error.message))
+            register(email, password)
+                .then(result => {
+                    console.log(result.user)
+                    navigate('/', { replace: true })
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    setError(errorMessage)
+                    console.log(errorMessage)
+                });
         }
     }
 
@@ -46,21 +56,21 @@ const Register = () => {
                             <label htmlFor="image_url"></label>
                             <input className='w-full py-2 px-5 mb-5 rounded-full bg-transparent border-2 border-white' type="text" name="image_url" id="image_url" placeholder='Image URL' />
                             <label htmlFor="email"></label>
-                            <input className='w-full py-2 px-5 mb-5 rounded-full bg-transparent border-2 border-white' type="email" name="email" id="email" placeholder='Email'  required />
+                            <input className='w-full py-2 px-5 mb-5 rounded-full bg-transparent border-2 border-white' type="email" name="email" id="email" placeholder='Email' required />
                             <label htmlFor="password"></label>
                             <input className='w-full py-2 px-5 mb-5 rounded-full bg-transparent border-2 border-white' type="password" name="password" id="password" placeholder='Password' required />
                             <label htmlFor="con_password"></label>
-                            <input className='w-full py-2 px-5 mb-5 rounded-full bg-transparent border-2 border-white' type="password" name="con_password" id="con_password" placeholder='Confirm Password' required />
-                            <p className='text-red-700 text-center'>{error}</p>
+                            <input className='w-full py-2 px-5 rounded-full bg-transparent border-2 border-white' type="password" name="con_password" id="con_password" placeholder='Confirm Password' required />
                         </div>
+                        <div className='py-2'><p className='text-warning my-2 text-center'>{error}</p></div>
                         <input className='btn primary-btn w-full text-white' type="submit" value="Submit" />
                     </form>
                     <div className='flex gap-3'>
                         <button className='btn btn-outline btn-primary rounded-full flex-1'>
-                            <FaGoogle /> <span className='ml-3'>Register With Google</span> 
+                            <FaGoogle /> <span className='ml-3'>Register With Google</span>
                         </button>
                         <button className='btn btn-outline btn-primary rounded-full flex-1'>
-                            <FaGithub /> <span className='ml-3'>Register With GitHub</span> 
+                            <FaGithub /> <span className='ml-3'>Register With GitHub</span>
                         </button>
                     </div>
                 </div>
