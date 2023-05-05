@@ -5,7 +5,7 @@ import { AuthContext } from '../../../providers/AuthProvider';
 const Register = () => {
     const navigate = useNavigate()
     const [error, setError] = useState('')
-    const { register, updateProfile_name_url} = useContext(AuthContext)
+    const { register, updateProfile_name_url } = useContext(AuthContext)
 
     const registerHandler = (e) => {
         e.preventDefault();
@@ -24,7 +24,9 @@ const Register = () => {
             console.log(name, image_url, email, password, con_password)
             register(email, password)
                 .then(result => {
-                    navigate('/' , { replace: true })
+                    const createdUser = result.user
+                    navigate('/', { replace: true })
+                    userProfileUpdate(createdUser, name, image_url)
                 })
                 .catch((error) => {
                     const errorMessage = error.message;
@@ -32,9 +34,18 @@ const Register = () => {
                     console.log(errorMessage)
                 });
 
-            updateProfile_name_url(name, image_url)
         }
     }
+    const userProfileUpdate = (user, name, image_url) => {
+        updateProfile_name_url(user, name, image_url)
+            .then(()=> {})
+            .catch((error) => {
+                const errorMessage = error.message;
+                setError(errorMessage)
+                console.log(errorMessage)
+            });
+    }
+
     const bannerStyle = {
         backgroundColor: "black",
         backgroundImage: "linear-gradient(to bottom, rgb(0 0 0 / 48%), rgb(0 0 0 / 48%)), url(/images/logIn_register_bg.jpg)",
@@ -64,7 +75,7 @@ const Register = () => {
                         <input className='btn primary-btn w-full text-white' type="submit" value="Submit" />
                     </form>
                     <p className='text-center py-3'>Already Have Account? <Link to='/login' className='text-primary'> LogIn </Link> Please. </p>
-                    
+
                 </div>
             </div>
         </section>

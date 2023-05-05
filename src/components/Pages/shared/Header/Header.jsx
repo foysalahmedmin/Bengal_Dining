@@ -57,7 +57,6 @@ const Header = () => {
                         ${menuActive ? 'left-0' : 'left-[-100%]'}
                         `}>
                         <li className='font-semibold'><ActiveLink to={"/"}>Home</ActiveLink></li>
-                        <li className='font-semibold'><ActiveLink to={"about"}>About</ActiveLink></li>
                         <li className='font-semibold'><ActiveLink to={'/blog'}>Blog</ActiveLink></li>
                     </ul>
                     <div className='flex justify-end items-center gap-5 md:w-1/3'>
