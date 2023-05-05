@@ -1,14 +1,11 @@
 import React, { useContext, useState } from 'react';
-import { FaGithub, FaGoogle } from "react-icons/fa";
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../providers/AuthProvider';
 
 const Register = () => {
     const navigate = useNavigate()
-    const location = useLocation()
-    const from = location.state?.from?.pathname || '/';
     const [error, setError] = useState('')
-    const { register, updateProfile_name_url, register_google, register_gitHub } = useContext(AuthContext)
+    const { register, updateProfile_name_url} = useContext(AuthContext)
 
     const registerHandler = (e) => {
         e.preventDefault();
@@ -22,12 +19,12 @@ const Register = () => {
         if (password !== con_password) {
             setError('Your Password did not match!')
         } else if (password.length < 6) {
-            setError('Password must be 6 disits')
+            setError('Password must be 6 digits')
         } else {
             console.log(name, image_url, email, password, con_password)
             register(email, password)
                 .then(result => {
-                    navigate(from , { replace: true })
+                    navigate('/' , { replace: true })
                 })
                 .catch((error) => {
                     const errorMessage = error.message;
@@ -38,30 +35,6 @@ const Register = () => {
             updateProfile_name_url(name, image_url)
         }
     }
-
-    const googleRegisterHandler = () => {
-        register_google()
-        .then(result => {
-            navigate('/', { replace: true })
-        })
-        .catch((error) => {
-            const errorMessage = error.message;
-            setError(errorMessage)
-            console.log(errorMessage)
-        });
-    }
-    const githubRegisterHandler = () => {
-        register_gitHub()
-        .then(result => {
-            navigate('/', { replace: true })
-        })
-        .catch((error) => {
-            const errorMessage = error.message;
-            setError(errorMessage)
-            console.log(errorMessage)
-        });
-    }
-
     const bannerStyle = {
         backgroundColor: "black",
         backgroundImage: "linear-gradient(to bottom, rgb(0 0 0 / 48%), rgb(0 0 0 / 48%)), url(/images/logIn_register_bg.jpg)",
@@ -70,11 +43,11 @@ const Register = () => {
         backgroundSize: "cover"
     }
     return (
-        <section style={bannerStyle} className='pt-[5rem] h-screen'>
-            <div className="container py-10 h-full flex justify-center md:justify-start flex-col lg:flex-row  gap-5 items-center text-white">
-                <div className='max-w-xl overflow-hidden'>
+        <section style={bannerStyle} className='min-h-screen'>
+            <div className="pt-[5rem] container py-10 min-h-screen flex justify-center lg:flex-row gap-5 items-center text-white">
+                <div className='w-full lg:w-1/2 overflow-hidden'>
                     <h1 className='text-center uppercase font-serif text-3xl mb-5'>Register</h1>
-                    <form onSubmit={registerHandler} className='min-w-3xl mb-5' action="">
+                    <form onSubmit={registerHandler} className='min-w-3xl' action="">
                         <div>
                             <label htmlFor="name"></label>
                             <input className='w-full py-2 px-5 mb-5 rounded-full bg-transparent border-2 border-white' type="text" name="name" id="name" placeholder='Name' required />
@@ -90,15 +63,8 @@ const Register = () => {
                         <div className='py-2'><p className='text-warning my-2 text-center'>{error}</p></div>
                         <input className='btn primary-btn w-full text-white' type="submit" value="Submit" />
                     </form>
-                    <p className='text-center mb-3'>Already have account? <Link to='/login' className='text-primary'>login</Link> please. </p>
-                    <div className='flex gap-3'>
-                        <button onClick={googleRegisterHandler} className='btn btn-outline btn-primary rounded-full flex-1'>
-                            <FaGoogle /> <span className='ml-3'>Register With Google</span>
-                        </button>
-                        <button onClick={githubRegisterHandler} className='btn btn-outline btn-primary rounded-full flex-1'>
-                            <FaGithub /> <span className='ml-3'>Register With GitHub</span>
-                        </button>
-                    </div>
+                    <p className='text-center py-3'>Already Have Account? <Link to='/login' className='text-primary'> LogIn </Link> Please. </p>
+                    
                 </div>
             </div>
         </section>

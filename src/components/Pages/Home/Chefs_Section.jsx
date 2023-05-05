@@ -11,7 +11,7 @@ const Chefs_Section = () => {
     return (
         <section className='py-10 text-black' id='chef_menu'>
             <div className="container">
-                <div className='text-center max-w-2xl mb-10 mx-auto'>
+                <div className='text-center max-w-xl mb-10 mx-auto'>
                     <h3 className=' text-2xl mb-3'>Our <span className='text-3xl font-bold text-primary'>C</span>hefs</h3>
                     <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corrupti voluptatum qui quia voluptate quam nisi!</p>
                 </div>

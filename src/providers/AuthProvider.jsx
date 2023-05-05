@@ -7,23 +7,23 @@ const auth = getAuth(app)
 const googleProvider = new GoogleAuthProvider()
 const gitHubProvider = new GithubAuthProvider()
 
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const register = (email , password) => {
+    const register = (email, password) => {
         setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
     const updateProfile_name_url = (name, photo) => {
         updateProfile(auth.currentUser, {
             displayName: name, photoURL: photo,
-          })
+        })
     }
-    const register_google = () => {
+    const logIn_with_google = () => {
         setLoading(true)
         return signInWithPopup(auth, googleProvider)
     }
-    const register_gitHub = () => {
+    const logIn_with_gitHub = () => {
         setLoading(true)
         return signInWithPopup(auth, gitHubProvider)
     }
@@ -31,18 +31,18 @@ const AuthProvider = ({children}) => {
         setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
-    const logOut = () =>{
+    const logOut = () => {
         return signOut(auth);
     }
 
-    useEffect(()=> {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) =>{
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
             setLoading(false)
         })
         // unmounting to stop observing more.
         return () => {
-            return unsubscribe ;
+            return unsubscribe;
         }
     }, [])
     const authInfo = {
@@ -50,8 +50,8 @@ const AuthProvider = ({children}) => {
         loading,
         register,
         updateProfile_name_url,
-        register_google,
-        register_gitHub,
+        logIn_with_google,
+        logIn_with_gitHub,
         logIn,
         logOut
     }
