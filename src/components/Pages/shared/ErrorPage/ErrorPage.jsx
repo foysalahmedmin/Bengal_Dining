@@ -1,19 +1,15 @@
 import React from 'react';
 import { Link, useRouteError } from 'react-router-dom'
-import { TbMoodSearch } from "react-icons/tb";
+import image from "../../../../assets/image404.png"
 
 const ErrorPage = () => {
-    const { error, status } = useRouteError()
+    const { error } = useRouteError()
     return (
         <section className='flex items-center h-screen p-16 bg-gray-100 text-gray-900'>
             <div className='container flex flex-col items-center justify-center px-5 mx-auto my-8'>
-                <TbMoodSearch className='w-40 h-40 text-yellow-500' />
+                <img className='mx-auto max-w-md' src={image} alt="" />
                 <div className='max-w-md text-center'>
-                    <h2 className='mb-8 font-extrabold text-9xl text-animation'>
-                        <span className='sr-only'>Error</span>
-                        {status || 404}
-                    </h2>
-                    <p className='text-2xl font-semibold md:text-3xl text-red-800 mb-8'>
+                    <p className='text-2xl pt-5 font-semibold md:text-3xl text-red-800 mb-8'>
                         {error?.message}
                     </p>
                     <Link to='/'>

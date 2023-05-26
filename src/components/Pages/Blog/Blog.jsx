@@ -2,6 +2,7 @@ import { PDFDownloadLink } from '@react-pdf/renderer';
 import React from 'react';
 import BlogPDF from './BlogPDF';
 import { HiDownload } from "react-icons/hi";
+import LoadSpinner from '../shared/LoadSpinner/LoadSpinner';
 
 const Blog = () => {
     const bannerStyle = {
@@ -16,7 +17,7 @@ const Blog = () => {
             <div className="container py-20">
                 <div className='text-right mb-5'>
                     <PDFDownloadLink document={<BlogPDF />} fileName='blog' >
-                        {({ loading }) => (loading ? <button >Loading Document...</button> : <button className="btn btn-primary border-none bg-primary bg-opacity-25"><HiDownload className='text-2xl' /> Download PDF</button>)}
+                        {({ loading }) => (loading ? <LoadSpinner /> : <button className="btn btn-primary border-none bg-primary bg-opacity-25"><HiDownload className='text-2xl' /> Download PDF</button>)}
                     </PDFDownloadLink>
                 </div>
                 <div className='text-center text-white max-w-xl mb-10 mx-auto'>

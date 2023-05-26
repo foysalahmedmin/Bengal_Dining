@@ -31,11 +31,14 @@ const Recipe_Card = ({ recipe_data }) => {
                 </ul>
                 <p className='uppercase'>Cooking Method: <span className='capitalize text-primary font-bold text-md'>{cookingMethod}</span></p>
                 {/* <p>Instructions: {instructions}</p> */}
-                <div className='uppercase flex items-center gap-4'><Rating
+                <div className='uppercase flex items-center gap-4'>
+                    <Rating
                     style={{ maxWidth: 130 }}
                     value={rating}
                     readOnly
-                /> <span className='capitalize text-primary font-bold text-lg'>{rating}</span></div>
+                /> 
+                <span className='capitalize text-primary font-bold text-lg'>{rating}</span>
+                </div>
 
                 <div className="card-actions justify-end">
                     {
